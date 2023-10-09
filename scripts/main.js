@@ -1,35 +1,91 @@
 /////////////////////////////FORMULARIO///////////////////////////////////////
 console.log("Formulario para registrar un contacto");
 //funcion flecha
-const obtenerNombreCompleto = (apellido, nombre) => {
+/*const obtenerNombreCompleto = (apellido, nombre) => {
     return apellido + ", " + nombre;
 };
 //funcion flecha pedida dentro de otra funcion flecha
 const obtenerDetalleDeContacto = (surName, name, email, message) => {
     return (obtenerNombreCompleto(surName, name) + ", con correo electónico: " + email + ". Dejó el siguiente mensaje: " + message
     );
-};  
+}; */ 
+/////Objetos Literales////
+////////////////////////////Concatenar 2 arrays de contactos///////////////////////////////
 
-let respuestaUsuario = prompt("¿Quieres simular un formulario de contacto?"); 
+const contacto1 = {
+    apellido: "Rita",
+    nombre: "Mengueche",
+    correo: "ritamengueche@yahoo.com.ar",
+    mensaje: "RitaPrimerContacto"
+};
+const contacto2 = {
+    apellido: "Angel",
+    nombre: "Miguel",
+    correo: "miguelangel@gmail.com",
+    mensaje: "MiguelSegundoContacto"
+};
+console.table(contacto1);
+console.table(contacto2);
+const listaDefinitiva = (contacto1, contacto2);
+console.table(listaDefinitiva);
 
-while (respuestaUsuario.trim().toUpperCase() === "SI") {
-
-let apellidos = prompt("Cuál es tú apellido"); 
-let nombres = prompt("Cuál es tú nombre"); 
-let correo = prompt("Cuál es tú correo electrónico"); 
-let mensaje = prompt("Cuál es tú mensaje"); 
-
-
-alert("¡Tu consulta fue enviada con exito!");
-
-
-console.log("El contacto " + obtenerDetalleDeContacto(apellidos, nombres, correo, mensaje));
-
-// TENEMOS que VOLVER a pedir al usuario su respuesta (para evitar un bucle infinito)
-respuestaUsuario = prompt("¿Quieres simular un formulario de contacto?"); // SI - NO
-}//fin del while
-alert("Gracias por usar nuestro simulador de formulario de contacto!");
 /////////////////////////////FORMULARIO///////////////////////////////////////
+const validarFormulario = (
+    apellidos = "",
+    nombres = "",
+    correo = "",
+    mensaje = ""
+) => {
+    let mensajes = [];
+    if (apellidos.length == 0) {
+    mensajes.push("Los Apellidos son requeridos");
+    }
+    if (nombres.length == 0) {
+    mensajes.push("Los Nombres son requeridos");
+    }
+    if (correo.length == 0) {
+    mensajes.push("El correo es requerido");
+    }
+    if (mensaje.length == 0) {
+    mensajes.push("El mensaje es requerido");
+    }
+    return mensajes; // Retornar los mensajes
+    };
+
+    const registrarContacto = (apellidos, nombres, correo, mensaje) => {
+    // 1er paso
+    const errores = validarFormulario(apellidos, nombres, correo, mensaje);
+    if (errores.length !== 0) {
+      // Hay errores en los campos del formulario, los vamos a mostrar en la UI
+        console.table(errores);
+        return false;
+    } else {
+        return true;
+    }
+    };
+
+    let respuestaUsuario = prompt("¿Quieres simular un formulario de contacto?");
+
+    while (respuestaUsuario.trim().toUpperCase() === "SI") {
+    let apellidos = prompt("Cuál es tu apellido");
+    let nombres = prompt("Cuál es tu nombre");
+    let correo = prompt("Cuál es tu correo electrónico");
+    let mensaje = prompt("Cuál es tu mensaje");
+
+    if (registrarContacto(apellidos, nombres, correo, mensaje)) {
+      // 3er paso mostrar los nuevos valores actualizados en la lista
+        alert("¡Tu registro fue enviado con éxito!");
+    } else {
+        alert("Debes verificar los datos ingresados");
+    }
+    console.log("Este es tu contacto registrado con apellido"+  apellidos, nombres,correo, mensaje,);
+    // TENEMOS que VOLVER a pedir al usuario su respuesta (para evitar un bucle infinito)
+    respuestaUsuario = prompt("¿Quieres simular un formulario de registro de contacto?"); // SI - NO
+    }
+
+    alert("Gracias por usar nuestro simulador de formulario de contacto!");
+
+
 
 
 
@@ -72,3 +128,36 @@ let registroUser = prompt("ya tenes cuenta? escribe si o no");
         console.log("-->el usuario creado es" + nameUser + "con la contraseña " + contrasenia);
         break;
     }
+
+    //////////////////REGISTRO DE MENSAJES CON OBJETOS LITERALES Y ARRAYS Y PEDIDO DE MENSAJE AL USUARIO//////////
+    const registroMensajes = [];
+
+function crearMensaje() {
+  const mensaje = {};
+
+  mensaje.usuario = prompt("Introduce tu nombre de usuario:");
+  mensaje.contenido = prompt("Escribe tu mensaje:");
+  mensaje.fecha = new Date().toLocaleString();
+
+  registroMensajes.push(mensaje);
+}
+
+function mostrarRegistroMensajes() {
+  console.log("Registro de mensajes:");
+  registroMensajes.forEach((mensaje, index) => {
+    console.log(`Mensaje ${index + 1}:`);
+    console.log(`Usuario: ${mensaje.usuario}`);
+    console.log(`Contenido: ${mensaje.contenido}`);
+    console.log(`Fecha: ${mensaje.fecha}`);
+    console.log("--------------");
+  });
+}
+
+let respuestaUser = prompt("¿Quieres agregar un mensaje? (SI/NO)");
+
+while (respuestaUser.trim().toUpperCase() === "SI") {
+  crearMensaje();
+  respuestaUser = prompt("¿Quieres agregar otro mensaje? (SI/NO)");
+}
+
+mostrarRegistroMensajes();
