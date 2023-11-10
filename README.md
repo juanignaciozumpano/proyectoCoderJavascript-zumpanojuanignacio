@@ -15,7 +15,6 @@ Proyecto Javascript
 El presente contiene algunas indicacioones sobre el contenido del proyecto 
 
 Como ser los siguientes:
-* login de un usario
-* formulario de registro de un contacto
+*ecomerce
 
-la idea es hacer un carrito de compras de productos y en lo posible hacer un login
+la idea es hacer un carrito de compras de un ecomerce de productos 
