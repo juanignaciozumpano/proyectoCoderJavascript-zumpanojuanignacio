@@ -15,6 +15,4 @@ Proyecto Javascript
 El presente contiene algunas indicacioones sobre el contenido del proyecto 
 
 Como ser los siguientes:
-*ecomerce
-
-la idea es hacer un carrito de compras de un ecomerce de productos 
+Validacion de email y contraseña para un ingreso de usuario
